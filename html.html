@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="css.css" />
+	</head>
+	<body>
+		<label for="password">Sprawdź, czy Twoje hasło jest bezpieczne!</label>
+		<input type="text" id="password" placeholder="Dawaj hasło..." />
+		<p class="passinfo">Nie podałeś hasła...</p>
+		<br />
+		<br />
+		<h3>Hasło musi składać się z:</h3>
+		<ul>
+			<li>minimum 10 znaków</li>
+			<li>liter</li>
+			<li>cyfr</li>
+		</ul>
+		<br />
+		<p>
+			Aby Twoje hasło było bardzo mocne, dodaj
+			<span>znaki specjalne</span>
+			.
+		</p>
+		<button>wyslij</button>
+		<script>
+			const pass = document.querySelector("#password");
+			const p = document.querySelector(".passinfo");
+			const letters = /[a-z]/i;
+			const numbers = /[0-9]/;
+			const special = /[!@#$%^&*()]/;
+			const minValue = 10;
+
+			const showFun = () => {
+				if (
+					pass.value.length > minValue &&
+					pass.value.match(letters) &&
+					pass.value.match(numbers) &&
+					pass.value.match(special)
+				) {
+					p.textContent = `Masz super Hasło!`;
+					p.style.color = `green`;
+				} else if (pass.value.length > minValue && pass.value.match(letters) && pass.value.match(numbers)) {
+					p.textContent = `masz całkiem spoko hasło`;
+					p.style.color = `gold`;
+				} else {
+					p.textContent = `masz słabe hasło`;
+					p.style.color = `red`;
+				}
+			};
+			const oldNew = () => {
+				if (pass.value !== ``) {
+					showFun();
+				} else {
+					p.textContent = `nie podales hasla`;
+					p.style.color = ``;
+				}
+			};
+			pass.addEventListener(`keyup`, oldNew);
+		</script>
+	</body>
+</html>
